@@ -35,10 +35,3 @@ Here is a somewhat interesting detail though: think back to the time when our ru
 Well, here is another thing: whenever anybody tells you that an event _can't bubble_ what they are trying to say is the following: if click events couldn't bubble our `element A` wouldn't be able to tell all the `Bubble Type` Event Listeners of its ancestors that they should execute and as a result they would just sleep lambently through the whole process ( missing all the fun ). The Focus event is a good example! So we can only catch it during the `Capture Phase`. What this means is that if we assign a `Capture Phase` kind of event Listener named `John` as well as a `Bubble Phase` kind of Event Listener named `Bob` to any of the ancestors of `element A`, `element A`, upon getting focus, will be able to tell `John` that it should start executing and `John` will do his job. However, because we say that Focus event _doesn't bubble_ ( I mean it is true it actually doesn't ) so because of this event's inability to bubble, `element A` will not be able to tell `Bob` to execute. So `Bob` will be a useless Event Listener for the Focus Event because `Bob` is a `Bubble Phase` kind of event listener.
 
 Well that is about it for the difference between capturing and bubbling. Seems like one click took us on a journey of a million years, didn't it :)
-
-__TO DO:__
-- Add Pictures and Animation
-- Add Code Examples
-- Make a Presentation
-- Examples of Events ( + reason )
-- Add the Demo
