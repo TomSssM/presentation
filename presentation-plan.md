@@ -37,13 +37,6 @@
   - Markup
   - Setting Event Listeners
 - Demo Link
-  - Event
-  - Elements
-  - Event Listeners
-  - Top Left
-    - Event Phase
-    - Target
-    - Current Target
 
 ## Slide 8
 - The same demo except jpg with John and Bob

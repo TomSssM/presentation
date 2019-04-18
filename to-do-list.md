@@ -1,7 +1,5 @@
 # TO DO
-- Add Code Examples
-- Make a Presentation
+- Make a Presentation Prototype
   - Examples of Events ( + reason )
   - Add Pictures and Animation
-  - Make it with `Reveal.js`
-- Add the Demo
+- Make it with `Reveal.js`
