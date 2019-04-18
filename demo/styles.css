@@ -143,6 +143,9 @@ body {
     line-height: 40px;
     overflow: hidden;
 }
+.element__handler--hidden {
+    visibility: hidden;
+}
 .element__handler-arrow {
     position: absolute;
     left: 0;
