@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>DOM Events & Event Listeners</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="./external-styles.css">
+		<link rel="stylesheet" href="lib/css/idea.css">
+		<script>
+			const link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="intro-slide" data-background="url('./assets/profile1.jpg') repeat-x 50% 0% / 100px auto">
+					<h1 style="font-size: 5rem" class="intro-slide__header">About me</h1>
+					<h2 style="font-size: 4rem" class="intro-slide__subheader">Ilya Kortasov</h2>
+				</section>
+				<section class="main-intro-slide">
+					<h1 class="main-intro-slide__header" style="font-size: 4rem;">DOM Events <br> <span style="color: #0D3349">&</span> Event Listeners</h1>
+					<span style="color: #0D3349">Bubbling and Capturing</span>
+				</section>
+				<section>
+					<section class="handling-slide" style="font-size: 3rem">
+						<p class="handling-slide__paragraph">
+							<span class="handling-slide__event fragment fade">Event Happening</span>
+							<i class="handling-slide__arrow fragment fade-right"></i>
+							<span class="handling-slide__handling fragment fade">Event Handling</span>
+						</p>
+						<p class="fragment fade" style="margin-top: 100px">
+							<span style="background: #ccc">Events</span>
+							are handled by
+							<span style="background: #ccc">Event Listeners</span>
+						</p>
+					</section>
+					<section class="images-slide">
+						<div class="images-slide-container">
+							<img data-fragment-index="2" class="fragment fade" style="border: none;margin: 0;box-shadow: none;" src="./assets/img-frag2.png" alt="fragment2">
+							<img data-fragment-index="1" class="fragment fade" style="border: none;margin: 0;box-shadow: none;" src="./assets/img-frag1.png" alt="fragment1">
+						</div>
+					</section>
+					<section style="text-align: left">
+						<h2 style="font-size: 4.4rem">Event Listeners are just functions</h2>
+						<pre style="margin: 3rem 0"><code class="hljs" data-trim data-line-numbers>
+someHTMLElement.addEventListener('click', function(event) {
+	// ...
+}, false);
+						</code></pre>
+						<p style="font-size: 2.2rem">
+							<code style="color: #0D3349">event.<b>target</b></code> - the one element where the event happened
+							<br>
+							<code style="color: #0D3349">event.<b>currentTarget</b></code> - one of the many elements whose
+							event listener is triggered
+						</p>
+					</section>
+				</section>
+				<section>
+					<section data-background-image="./assets/analogy.png" data-background-size="auto 90%"></section>
+					<section>
+						<ol>
+							<li>Capture Phase</li>
+							<li>Target Phase</li>
+							<li>Bubbling Phase</li>
+						</ol>
+					</section>
+				</section>
+				<section>
+					<section>
+						<pre><code class="hljs" data-trim data-line-numbers="2,9-12">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;meta name="viewport" content="width=device-width"&gt;
+	&lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+	&lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;span id="elementA"&gt;Element A&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+						</code></pre>
+						<pre><code class="hljs" data-trim data-line-numbers="3-5,7-9">
+const elemA = document.querySelector('#elementA');
+
+elemA.addEventListener('click', (e) => {
+	// ...
+}, false);
+
+elemA.addEventListener('click', (e) => {
+	// ...
+}, true);
+						</code></pre>
+					</section>
+					<section>
+						<a target="_blank" href="https://tomsssm.github.io/presentation/demo/">DEMO</a>
+					</section>
+				</section>
+				<section style="font-size: 0">
+					<img class="fragment fade-right" style="vertical-align: top; border: none; box-shadow: none" src="./assets/bob-arrow.png" alt="bob" width="250px">
+					<img style="vertical-align: top; border: none; box-shadow: none" src="./assets/example-with-name.png" alt="example names" width="350px">
+					<img class="fragment fade-left" style="vertical-align: top; border: none; box-shadow: none" src="./assets/john.png" alt="john" width="250px">
+				</section>
+				<section style="text-align: left">
+					<h1 style="font-size: 3rem">Example</h1>
+					<code>focus / blur</code>
+					<pre><code class="hljs" data-trim data-line-numbers>
+elm.addEventListener('focus', (e) => {
+	console.log('focus on element');
+}, false);
+
+document.body.addEventListener('focus', (e) => {
+	console.log('focus on body');
+}, false);
+					</code></pre>
+					<a target="_blank" href="https://tomsssm.github.io/presentation/example/">see if I am right</a>
+				</section>
+				<section>
+					<h1 style="font-size: 3rem">Other Events that don’t bubble:</h1>
+					<ul style="font-size: 2rem">
+						<li>mouseenter</li>
+						<li>mouseleave</li>
+						<li>load</li>
+						<li>unload</li>
+						<li>scroll</li>
+						<li>blur</li>
+						<li>DOMNodeRemovedFromDocument</li>
+						<li>DOMNodeInsertedIntoDocument</li>
+						<li>abort</li>
+						<li>error</li>
+						<li>progress</li>
+						<li><em>and so on...</em></li>
+					</ul>
+				</section>
+				<section style="text-align: left">
+					<h1 style="font-size: 4rem">How to fix</h1>
+					<ul style="font-size: 3rem">
+						<li>use other events</li>
+						<li>catch them during the <code>Capture Phase</code></li>
+					</ul>
+				</section>
+				<section style="text-align: left">
+					<h1 style="font-size: 4rem">Fixing previous example:</h1>
+					<pre><code class="hljs" data-trim data-line-numbers="3">
+document.body.addEventListener('focus', () => {
+	console.log('focus on body');
+}, true);
+					</code></pre>
+					<a target="_blank" href="https://tomsssm.github.io/presentation/example-fixed/">see if that worked</a>
+				</section>
+				<section>
+					<span style="font-family: 'Helvetica Neue Light', Calibri, sans-serif; font-size: 4.4rem">
+						Thank you for attention
+						<i class="tada-emoji"></i>
+					</span>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				transition: 'slide',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
